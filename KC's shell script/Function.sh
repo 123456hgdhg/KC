@@ -14,7 +14,7 @@ CONFIG_BASE="/storage/emulated/0/kc配置文件"
 if [ "$(getprop persist.sys.timezone)" = "Asia/Shanghai" ]; then
     BASE_URL="https://gitee.com/BOT_141_2580/KC/raw/main"
 else
-    BASE_URL="https://raw.githubusercontent.com/123456hgdhg/KC/main"
+    BASE_URL="https://raw.githubusercontent.com/123456hgdhg/KC/refs/heads/main"
 fi
 
 # ========== 工具函数 ==========
