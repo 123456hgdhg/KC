@@ -371,7 +371,7 @@ download_config() {
     echo -e "${GREEN} ✓" || echo -e "${RED} ✗"
   fi
   
-  echo -e "${GREEN}完成${NC} ${game} ${config}配置下载完成"
+  echo -e "${GREEN}完成${NC} ${game} ${config}配置下载完成 $BASE_URL"
 }
 
 # 应用游戏配置
