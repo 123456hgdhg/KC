@@ -38,40 +38,41 @@ read_char() {
 
 # 安全下载（带文件存在检查）
 safe_download() {
-  local url=$1
-  local output=$2
-  local retry=3
-  local download_source=$(echo "$url" | awk -F/ '{print $1"//"$3}')
+  url=$1
+  output=$2
+  retry=3
   
-  echo -e "\n${CYAN}📥 下载任务信息：${NC}"
-  echo -e " 源服务器: ${BLUE}$download_source${NC}"
-  echo -e " 目标路径: ${YELLOW}$output${NC}"
-  
-  # 删除已存在的文件（强制重新下载）
-  [ -f "$output" ] && rm -f "$output"
-  
-  # 下载尝试
+  # 如果文件已存在，先删除
+  if [ -f "$output" ]; then
+    echo -n -e "${YELLOW}文件存在，先删除...${NC}"
+    if rm -f "$output"; then
+      echo -e "${GREEN} ✓${NC}"
+    else
+      echo -e "${RED} ✗ 删除失败${NC}"
+      return 1
+    fi
+  fi
+
   while [ $retry -gt 0 ]; do
-    echo -n -e "${BLUE}⏳ 尝试下载 (剩余重试: $retry)...${NC}"
-    
+    echo -n -e "${BLUE}正在下载...${NC}"
     if curl -sL --connect-timeout 15 "$url" -o "$output"; then
+      # 下载成功后检查文件是否有效（非空）
       if [ -s "$output" ]; then
-        echo -e "${GREEN} ✅ 成功${NC}"
-        echo -e " 文件校验: ${YELLOW}$(du -sh "$output" | cut -f1)${NC}"
+        echo -e "${GREEN} ✓${NC}"
         return 0
       else
-        echo -e "${RED} ❌ 空文件${NC}"
+        echo -e "${RED} ✗ 文件为空${NC}"
         rm -f "$output"
       fi
     else
-      echo -e "${RED} ❌ 失败${NC}"
+      echo -e "${RED} ✗${NC}"
     fi
     
     retry=$((retry-1))
-    [ $retry -gt 0 ] && sleep 2
+    [ $retry -gt 0 ] && echo -e "${YELLOW}剩余重试次数: $retry${NC}"
+    sleep 2
   done
   
-  echo -e "${RED}‼️ 所有尝试失败，放弃下载${NC}"
   return 1
 }
 
