@@ -283,7 +283,8 @@ esac
       sleep 1
       ;;
   esac
-done  echo -e "${YELLOW}2. 下载灵敏度配置 * Download Sensitivity Config"
+done  
+  echo -e "${YELLOW}2. 下载灵敏度配置 * Download Sensitivity Config"
   echo -e "${RED}3. 修改设备ID * Modify Device ID"
   echo -e "${CYAN}4. 无限游客 * Unlimited tourists"
   echo -e "${CYAN}5. 导入国际服OBB * < 更新不完善 * Incomplete update >"
