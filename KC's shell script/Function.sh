@@ -362,7 +362,7 @@ download_config() {
   fi
   
   # 下载第二个文件
-  echo -n -e "${BLUE}正在获取   $BASE_URL  ${file2}...${NC}"
+  echo -n -e "${BLUE}正在获取${file2}...${NC}"
   if [ "$config" = "小金" ]; then
     safe_download "${BASE_URL}/${game_dir}/${url_path}/${file2}" "$CONFIG_BASE/${target_dir}/${file2}" && \
     echo -e "${GREEN} ✓" || echo -e "${RED} ✗"
