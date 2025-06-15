@@ -284,6 +284,7 @@ esac
       ;;
   esac
 done  
+#########？？？？？？？？？？？？？？？？
   echo -e "${YELLOW}2. 下载灵敏度配置 * Download Sensitivity Config"
   echo -e "${RED}3. 修改设备ID * Modify Device ID"
   echo -e "${CYAN}4. 无限游客 * Unlimited tourists"
